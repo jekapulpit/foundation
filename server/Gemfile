@@ -11,8 +11,6 @@ gem 'pg'
 gem 'figaro'
 gem 'jquery-rails'
 gem 'puma', '~> 3.11'
-gem 'react-rails'
-gem 'webpacker'
 # Use SCSS for stylesheets
 gem 'bootstrap', '~> 4.3.1'
 gem 'sass-rails', '~> 5.0'
