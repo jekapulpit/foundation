@@ -5,7 +5,14 @@ class Api::V4::ScpObjectsController < ApplicationController
     render json: { objects: objects }
   end
 
-  def show; end
+  def show
+    begin
+      object = ScpObject.find(params[:id])
+      render json: { object: object, errors: {} }
+    rescue ActiveRecord::RecordNotFound => exception
+      render json: { object: false, errors: { record: [exception.message] } }
+    end
+  end
 
   def create
     new_object = ScpObject.create(scp_object_params)
@@ -18,7 +25,7 @@ class Api::V4::ScpObjectsController < ApplicationController
       success = object.update_attributes(scp_object_params)
       render json: { success: success, object: object, errors: object.errors }
     rescue ActiveRecord::RecordNotFound => exception
-      render json: { success: false, errors: exception.message }
+      render json: { success: false, errors: { record: [exception.message] } }
     end
   end
 
@@ -27,7 +34,7 @@ class Api::V4::ScpObjectsController < ApplicationController
       destroying_object  = ScpObject.find(params[:id]).destroy
       render json: { success: !!destroying_object, object: destroying_object }
     rescue ActiveRecord::RecordNotFound => exception
-      render json: { success: false, errors: exception.message }
+      render json: { success: false, errors: { record: [exception.message] } }
     end
   end
 
