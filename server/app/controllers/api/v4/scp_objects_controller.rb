@@ -15,8 +15,12 @@ class Api::V4::ScpObjectsController < ApplicationController
   end
 
   def create
-    new_object = ScpObject.create(scp_object_params)
-    render json: { success: new_object.errors.any?, object: new_object, errors: new_object.errors }
+    begin
+      new_object = ScpObject.create(scp_object_params)
+      render json: { success: new_object.errors.any?, object: new_object, errors: new_object.errors }
+    rescue ArgumentError => exception
+      render json: { success: false, errors: { object_class: [exception.message] } }
+    end
   end
 
   def update
