@@ -1,6 +1,7 @@
 import React from "react"
 import store from '../store'
 import {connect} from "react-redux";
+import { Link } from "react-router-dom";
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -19,9 +20,9 @@ class MainPage extends React.Component {
 
     render() {
         let objects = this.props.objectList.map((object) => {
-           return (<div key={object.number} >
+           return (<Link to={"/scp_objects/" + object.number} key={object.number} >
                {`SCP-${object.number} - ${object.name}`}
-           </div>)
+           </Link>)
         });
         return (
             <div className={"container"}>
