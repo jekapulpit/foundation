@@ -5,6 +5,9 @@ import {connect} from "react-redux";
 class ObjectPage extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
         fetch(`http://localhost:3001/api/v4/scp_objects/${this.props.match.params.id}`, {
             mode: 'cors'
         })
@@ -14,14 +17,12 @@ class ObjectPage extends React.Component {
             })
     }
 
-    componentDidMount() {
-    }
-
     render() {
         return (
             <div className={"container"}>
                 <div className="object-list">
-                    {store.getState().object.currentObject.name}
+                    <p>{this.props.currentObject.name}</p>
+                    <p>{this.props.currentUser.name}</p>
                 </div>
             </div>
         )
@@ -30,8 +31,8 @@ class ObjectPage extends React.Component {
 
 
 const mapStateToProps = state => ({
-    object: state.object,
-    user: state.user
+    currentObject: state.object.currentObject,
+    currentUser: state.user.currentUser
 });
 
 export default connect(mapStateToProps)(ObjectPage)

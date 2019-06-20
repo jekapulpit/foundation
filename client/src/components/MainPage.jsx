@@ -18,13 +18,14 @@ class MainPage extends React.Component {
     }
 
     render() {
-        let objects = store.getState().object.objectList.map((object) => {
+        let objects = this.props.objectList.map((object) => {
            return (<div key={object.number} >
                {`SCP-${object.number} - ${object.name}`}
            </div>)
         });
         return (
             <div className={"container"}>
+                {this.props.currentUser.name}
                 <div className="object-list">
                     {objects}
                 </div>
@@ -35,8 +36,8 @@ class MainPage extends React.Component {
 
 
 const mapStateToProps = state => ({
-    object: state.object,
-    user: state.user
+    objectList: state.object.objectList,
+    currentUser: state.user.currentUser
 });
 
 export default connect(mapStateToProps)(MainPage)
