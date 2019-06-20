@@ -33,5 +33,5 @@ RSpec.describe Api::V4::ScpObjectsController, type: :controller do
       end
     end
   end
-  
+
 end
