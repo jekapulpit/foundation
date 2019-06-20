@@ -4,6 +4,7 @@ export default  {
         currentUser: { name: 'eugene' },
     },
     object: {
-        objectList: []
+        objectList: [],
+        currentObject: {}
     }
 };

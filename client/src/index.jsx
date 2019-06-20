@@ -8,12 +8,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import App from './App';
 import Profile from './components/users/Profile';
 import MainPage from "./components/MainPage";
+import ObjectPage from "./components/ObjectPage";
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Route exact path="/" component={MainPage} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/scp_objects/:id" component={ObjectPage} />
         </Router>
     </Provider>,
     document.getElementById('root'));
