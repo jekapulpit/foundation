@@ -1,5 +1,6 @@
 import React from "react"
 import store from '../store'
+import {connect} from "react-redux";
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -7,21 +8,35 @@ class MainPage extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3001/api/v4/scp_objects/')
+        fetch('http://localhost:3001/api/v4/scp_objects/', {
+            mode: 'cors'
+        })
             .then((response) => { return response.json() })
             .then((data) => {
-                console.log(data);
                 store.dispatch({ type: 'SET_OBJECT_LIST', objectList: data.objects })
-            }).then(() => {console.log(store.getState())})
+            })
     }
 
     render() {
+        let objects = store.getState().object.objectList.map((object) => {
+           return (<div key={object.number} >
+               {`SCP-${object.number} - ${object.name}`}
+           </div>)
+        });
         return (
-            <div>
-            hello,
+            <div className={"container"}>
+                <div className="object-list">
+                    {objects}
+                </div>
             </div>
         )
     }
 }
 
-export default MainPage
+
+const mapStateToProps = state => ({
+    object: state.object,
+    user: state.user
+});
+
+export default connect(mapStateToProps)(MainPage)

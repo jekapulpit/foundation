@@ -1,3 +1,5 @@
+import store from "../store";
+
 export default (state = { objectList: [] }, action) => {
     switch (action.type) {
         case 'SET_OBJECT_LIST':

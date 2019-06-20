@@ -9,6 +9,6 @@ class AnswerOnOptions
     @headers["X-Requested-With"] = "XMLHttpRequest"
     @headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
     @headers["Access-Control-Allow-Headers"] = "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-    [@status, @headers, @response.body]
+    [@status, @headers, @response]
   end
 end
