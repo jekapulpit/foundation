@@ -1,4 +1,9 @@
 export default  {
-    users: [{ name: 'eugene' }],
-    currentUser: { name: 'eugene' }
+    user: {
+        users: [{ name: 'eugene' }],
+        currentUser: { name: 'eugene' },
+    },
+    object: {
+        objectList: []
+    }
 };

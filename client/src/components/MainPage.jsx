@@ -1,12 +1,26 @@
 import React from "react"
 import store from '../store'
 
-const MainPage = props => {
-    return (
-           <div>
-               hello, {store.getState().users.length}
-           </div>
-    );
-};
+class MainPage extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        fetch('http://localhost:3001/api/v4/scp_objects/')
+            .then((data) => {
+                console.log(data);
+                store.dispatch({ type: 'SET_OBJECT_LIST', objectList: data.objects })
+            }).then(() => {console.log(store.getState())})
+    }
+
+    render() {
+        return (
+            <div>
+            hello,
+            </div>
+        )
+    }
+}
 
 export default MainPage

@@ -1,7 +1,11 @@
 import usersReducer from "./reducers/usersReducer";
-import { createStore } from "redux"; // импорт из Redux-библиотеки
+import objectReducer from "./reducers/objectReduces"
+import { createStore, combineReducers } from "redux"; // импорт из Redux-библиотеки
 import initialState from './initialState';
 
 export default createStore(
-    usersReducer,
+    combineReducers({
+        user: usersReducer,
+        object: objectReducer
+    }),
     initialState);
