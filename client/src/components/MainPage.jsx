@@ -3,6 +3,7 @@ import store from '../store'
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
 import { SET_OBJECT_LIST } from "../actionTypes";
+import '../stylesheets/components/MainPage.scss'
 
 class MainPage extends React.Component {
     constructor(props) {
