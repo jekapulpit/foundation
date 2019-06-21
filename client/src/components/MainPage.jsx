@@ -2,6 +2,7 @@ import React from "react"
 import store from '../store'
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
+import { SET_OBJECT_LIST } from "../actionTypes";
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class MainPage extends React.Component {
         })
             .then((response) => { return response.json() })
             .then((data) => {
-                store.dispatch({ type: 'SET_OBJECT_LIST', objectList: data.objects })
+                this.props.toggleSetObjectList(data)
             })
     }
 
@@ -41,4 +42,12 @@ const mapStateToProps = state => ({
     currentUser: state.user.currentUser
 });
 
-export default connect(mapStateToProps)(MainPage)
+const mapDispatchToProps = function(dispatch, ownProps) {
+    return {
+        toggleSetObjectList: (data) => {
+            dispatch({ type: SET_OBJECT_LIST, objectList: data.objects })
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage)

@@ -1,6 +1,7 @@
 import React from "react"
 import store from '../store'
 import {connect} from "react-redux";
+import { SET_OBJECT } from '../actionTypes'
 
 class ObjectPage extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class ObjectPage extends React.Component {
         })
             .then((response) => { return response.json() })
             .then((data) => {
-                store.dispatch({ type: 'SET_OBJECT', currentObject: data.object })
+                this.props.toggleSetObject(data)
             })
     }
 
@@ -35,4 +36,12 @@ const mapStateToProps = state => ({
     currentUser: state.user.currentUser
 });
 
-export default connect(mapStateToProps)(ObjectPage)
+const mapDispatchToProps = function(dispatch, ownProps) {
+    return {
+        toggleSetObject: (data) => {
+            dispatch({ type: SET_OBJECT, currentObject: data.object })
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ObjectPage)
