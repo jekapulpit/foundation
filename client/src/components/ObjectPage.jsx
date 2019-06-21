@@ -30,6 +30,7 @@ class ObjectPage extends React.Component {
     };
 
     handleUpdate = (newObjectValues) => {
+        console.log('agaaaaa');
         fetch(`http://localhost:3001/api/v4/scp_objects/${this.props.match.params.id}`, {
             method: 'PUT',
             headers: {
@@ -52,7 +53,6 @@ class ObjectPage extends React.Component {
     };
 
     render() {
-        this.objectFields = {};
         let objectView = !this.props.currentObject.editable ?
             (<ObjectFields handleEdit={this.handleEdit} currentObject={this.props.currentObject} />)
             :
