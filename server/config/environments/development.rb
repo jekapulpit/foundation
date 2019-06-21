@@ -64,5 +64,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.middleware.use AnswerOnOptions
+  config.middleware.use AddAccessHeaders
+  config.middleware.insert_after Rails::Rack::Logger, AnswerOnOptions
 end

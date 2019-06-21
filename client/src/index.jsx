@@ -5,7 +5,6 @@ import * as serviceWorker from './serviceWorker';
 import store from './store'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import App from './App';
 import Profile from './components/users/Profile';
 import MainPage from "./components/MainPage";
 import ObjectPage from "./components/ObjectPage";

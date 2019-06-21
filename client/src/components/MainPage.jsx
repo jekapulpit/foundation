@@ -1,15 +1,10 @@
 import React from "react"
-import store from '../store'
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
 import { SET_OBJECT_LIST } from "../actionTypes";
 import '../stylesheets/components/MainPage.scss'
 
 class MainPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         fetch('http://localhost:3001/api/v4/scp_objects/', {
             mode: 'cors'

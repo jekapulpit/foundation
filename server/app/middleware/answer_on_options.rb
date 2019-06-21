@@ -4,11 +4,16 @@ class AnswerOnOptions
   end
   def call env
     @status, @headers, @response = @app.call(env)
-    @headers["Accept"] = "application/json"
-    @headers["Access-Control-Allow-Origin"] = "*"
-    @headers["X-Requested-With"] = "XMLHttpRequest"
-    @headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
-    @headers["Access-Control-Allow-Headers"] = "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-    [@status, @headers, @response]
+    request = Rack::Request.new(env)
+    if request.options?
+      @headers["Accept"] = "application/json"
+      @headers["Access-Control-Allow-Origin"] = "*"
+      @headers["X-Requested-With"] = "XMLHttpRequest"
+      @headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
+      @headers["Access-Control-Allow-Headers"] = "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+      [204, @headers, []]
+    else
+      @app.call(env)
+    end
   end
 end
