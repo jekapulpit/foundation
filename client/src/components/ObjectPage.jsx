@@ -1,8 +1,16 @@
 import React from "react"
 import {connect} from "react-redux";
+import ObjectFields from "./object/ObjectFields";
+import EditObjectForm from "./object/EditObjectForm";
 import { SET_OBJECT, HANDLE_EDIT, HANDLE_UPDATE } from '../actionTypes'
 
 class ObjectPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleEdit = this.handleEdit.bind(this)
+    }
+
     componentDidMount() {
         fetch(`http://localhost:3001/api/v4/scp_objects/${this.props.match.params.id}`, {
             mode: 'cors'
@@ -36,7 +44,7 @@ class ObjectPage extends React.Component {
             })
     };
 
-    handleEdit = (objectFields) => {
+    handleEdit = (objectFields = {}) => {
         if(this.props.currentObject.editable){
             this.handleUpdate(this.mapFieldsToValues(objectFields))
         }
@@ -46,22 +54,12 @@ class ObjectPage extends React.Component {
     render() {
         this.objectFields = {};
         let objectView = !this.props.currentObject.editable ?
-            (<div className="object-list">
-                <p>{`SCP-${this.props.currentObject.number} - ${this.props.currentObject.name}`}</p>
-                <p>{this.props.currentObject.containment_procedures}</p>
-                <p>{this.props.currentObject.description}</p>
-            </div>)
+            (<ObjectFields handleEdit={this.handleEdit} currentObject={this.props.currentObject} />)
             :
-            (<form className="object-list">
-                SCP-<input ref={input => this.objectFields.number = input} type="text" defaultValue={this.props.currentObject.number} />
-                <input ref={input => this.objectFields.name = input} type="text" defaultValue={this.props.currentObject.name} />
-                <textarea ref={input => this.objectFields.containment_procedures = input} defaultValue={this.props.currentObject.containment_procedures} />
-                <textarea ref={input => this.objectFields.description = input} defaultValue={this.props.currentObject.description} />
-            </form>);
+            (<EditObjectForm handleEdit={this.handleEdit} currentObject={this.props.currentObject}/>);
         return (
             <div className={"container"}>
                 {objectView}
-                <button onClick={() => this.handleEdit(this.objectFields)}>edit</button>
             </div>
         )
     }

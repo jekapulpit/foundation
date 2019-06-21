@@ -14,6 +14,7 @@ ReactDOM.render(
         <Router>
             <Route exact path="/" component={MainPage} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/scp_objects/" component={MainPage} />
             <Route exact path="/scp_objects/:id" component={ObjectPage} />
         </Router>
     </Provider>,

@@ -65,5 +65,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.middleware.use AddAccessHeaders
-  config.middleware.insert_after Rails::Rack::Logger, AnswerOnOptions
+  config.middleware.insert_before Rack::Sendfile, AnswerOnOptions
 end
