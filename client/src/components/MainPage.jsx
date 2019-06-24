@@ -27,6 +27,9 @@ class MainPage extends React.Component {
                 <div className="object-list">
                     {objects}
                 </div>
+                <Link to={"/create_new_object"} >
+                    Create new object
+                </Link>
             </div>
         )
     }
