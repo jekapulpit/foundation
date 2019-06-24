@@ -1,33 +1,35 @@
 import React from "react"
-import store from '../store'
 import {connect} from "react-redux";
+import { Link } from "react-router-dom";
+import { SET_OBJECT_LIST } from "../actionTypes";
+import '../stylesheets/components/MainPage.scss'
 
 class MainPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         fetch('http://localhost:3001/api/v4/scp_objects/', {
             mode: 'cors'
         })
             .then((response) => { return response.json() })
             .then((data) => {
-                store.dispatch({ type: 'SET_OBJECT_LIST', objectList: data.objects })
+                this.props.toggleSetObjectList(data)
             })
     }
 
     render() {
-        let objects = store.getState().object.objectList.map((object) => {
-           return (<div key={object.number} >
+        let objects = this.props.objectList.map((object) => {
+           return (<Link to={"/scp_objects/" + object.number} key={object.number} >
                {`SCP-${object.number} - ${object.name}`}
-           </div>)
+           </Link>)
         });
         return (
             <div className={"container"}>
+                {this.props.currentUser.name}
                 <div className="object-list">
                     {objects}
                 </div>
+                <Link to={"/create_new_object"} >
+                    Create new object
+                </Link>
             </div>
         )
     }
@@ -35,8 +37,16 @@ class MainPage extends React.Component {
 
 
 const mapStateToProps = state => ({
-    object: state.object,
-    user: state.user
+    objectList: state.object.objectList,
+    currentUser: state.user.currentUser
 });
 
-export default connect(mapStateToProps)(MainPage)
+const mapDispatchToProps = function(dispatch, ownProps) {
+    return {
+        toggleSetObjectList: (data) => {
+            dispatch({ type: SET_OBJECT_LIST, objectList: data.objects })
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
