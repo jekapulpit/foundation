@@ -52,6 +52,20 @@ class ObjectPage extends React.Component {
         this.props.toggleHandleEdit(this.props.currentObject.editable)
     };
 
+    handleDelete = () => {
+        fetch(`http://localhost:3001/api/v4/scp_objects/${this.props.currentObject.number}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            },
+        )
+            .then((response) => { return response.json() })
+            .then((data) => {
+                window.location = ('/scp_objects/')
+            })
+    };
+
     render() {
         let objectView = !this.props.currentObject.editable ?
             (<ObjectFields handleEdit={this.handleEdit} currentObject={this.props.currentObject} />)
@@ -60,6 +74,7 @@ class ObjectPage extends React.Component {
         return (
             <div className={"container"}>
                 {objectView}
+                <button onClick={() => this.handleDelete()}>delete object</button>
             </div>
         )
     }
@@ -81,7 +96,7 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleHandleUpdate: (data) => {
             dispatch({ type: HANDLE_UPDATE, currentObject: data.object })
-        }
+        },
     }
 };
 
