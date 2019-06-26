@@ -1,3 +1,3 @@
-export default (state = { users: [] }, action) => {
+export default (state = { currentUser: {} }, action) => {
     return state
 };
