@@ -1,5 +1,5 @@
 class Api::V4::AuthsController < ApplicationController
-  skip_before_action :authenticate_user
+  skip_before_action :authenticate_user, only: :create
 
   def create
     token_command = Users::AuthenticateUserCommand.call(*params.slice(:email, :password).values)
@@ -12,5 +12,11 @@ class Api::V4::AuthsController < ApplicationController
     else
       render json: { error: token_command.errors }, status: :unauthorized
     end
+  end
+
+  def sync
+    render json: {
+        current_user: current_user
+    }
   end
 end
