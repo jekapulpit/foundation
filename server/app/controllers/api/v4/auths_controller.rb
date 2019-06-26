@@ -1,4 +1,6 @@
 class Api::V4::AuthsController < ApplicationController
+  skip_before_action :authenticate_user
+
   def create
     token_command = Users::AuthenticateUserCommand.call(*params.slice(:user, :password).values)
 
