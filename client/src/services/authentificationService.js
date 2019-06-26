@@ -26,7 +26,7 @@ export function authentificateUser(userCredintials) {
 }
 
 export function syncronizeCurrentUser() {
-    if(getCurrentUser()) {
+    if(!getCurrentUser()) {
         let url = 'http://localhost:3001/api/v4/sync';
         let requestOpts = {
             method: 'GET',
@@ -41,6 +41,7 @@ export function syncronizeCurrentUser() {
                 if(data.current_user) {
                     setUserSession(data.current_user);
                 }
-            })
+            });
     }
+    return getCurrentUser()
 }

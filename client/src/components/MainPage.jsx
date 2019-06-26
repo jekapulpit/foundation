@@ -28,7 +28,6 @@ class MainPage extends React.Component {
         });
         return (
             <div className={"container"}>
-                {this.props.currentUser.name}
                 <div className="object-list">
                     {objects}
                 </div>
