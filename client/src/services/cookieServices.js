@@ -30,3 +30,7 @@ export const deleteCookie = (name) => {
         expires: -1
     })
 };
+
+export const getTokenFromCookie = () => {
+    return document.cookie.replace(/(?:(?:^|.*;\s*)auth_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+};

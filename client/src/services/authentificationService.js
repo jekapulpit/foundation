@@ -1,5 +1,5 @@
 import { setUserSession, getCurrentUser } from './localStorageServices'
-import { setCookie } from './cookieServices'
+import { setCookie, getTokenFromCookie } from './cookieServices'
 import store from '../store'
 import {SET_OBJECT_LIST} from "../actionTypes";
 
@@ -18,7 +18,7 @@ export function authentificateUser(userCredintials) {
             if(data.token) {
                 setUserSession(data.current_user);
                 setCookie('auth_token', data.token);
-                console.log(getCurrentUser());
+                console.log(getTokenFromCookie());
             }
             else {
                 console.log('nope')

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import ObjectFields from "./object/ObjectFields";
 import EditObjectForm from "./object/EditObjectForm";
 import { SET_OBJECT, HANDLE_EDIT, HANDLE_UPDATE } from '../actionTypes'
+import { getTokenFromCookie } from "../services/cookieServices";
 
 class ObjectPage extends React.Component {
     constructor(props) {
@@ -13,7 +14,11 @@ class ObjectPage extends React.Component {
 
     componentDidMount() {
         fetch(`http://localhost:3001/api/v4/scp_objects/${this.props.match.params.id}`, {
-            mode: 'cors'
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': getTokenFromCookie()
+            },
         })
             .then((response) => { return response.json() })
             .then((data) => {
@@ -33,7 +38,8 @@ class ObjectPage extends React.Component {
         fetch(`http://localhost:3001/api/v4/scp_objects/${this.props.match.params.id}`, {
             method: 'PUT',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': getTokenFromCookie()
             },
             body: JSON.stringify({ scp_object: newObjectValues })
         },
@@ -56,7 +62,8 @@ class ObjectPage extends React.Component {
         fetch(`http://localhost:3001/api/v4/scp_objects/${this.props.currentObject.number}`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': getTokenFromCookie()
                 },
             },
         )

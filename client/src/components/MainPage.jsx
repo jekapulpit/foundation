@@ -2,14 +2,17 @@ import React from "react"
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
 import { SET_OBJECT_LIST } from "../actionTypes";
-import { authentificateUser } from '../services/authentificationService'
 import { getCurrentUser } from '../services/localStorageServices'
+import { getTokenFromCookie } from '../services/cookieServices'
 import '../stylesheets/components/MainPage.scss'
 
 class MainPage extends React.Component {
     componentDidMount() {
         fetch('http://localhost:3001/api/v4/scp_objects/', {
-            mode: 'cors'
+            mode: 'cors',
+            headers: {
+                'Authorization': getTokenFromCookie()
+            }
         })
             .then((response) => { return response.json() })
             .then((data) => {

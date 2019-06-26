@@ -1,6 +1,4 @@
 class Api::V4::ScpObjectsController < ApplicationController
-  skip_before_action :authenticate_user
-
   def index
     objects = ScpObject.all
     render json: { objects: objects }
