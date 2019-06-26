@@ -18,6 +18,7 @@ export function authentificateUser(userCredintials) {
             if(data.token) {
                 setUserSession(data.current_user);
                 setCookie('auth_token', data.token);
+                window.location = '/profile'
             }
             else {
                 console.log('nope')

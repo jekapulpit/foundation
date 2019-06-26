@@ -1,10 +1,10 @@
 import React from "react"
-import store from '../../store'
+import { getCurrentUser } from "../../services/localStorageServices";
 
 const Profile = props => {
     return (
            <div>
-               hello, {store.getState().currentUser.name}
+               hello, {getCurrentUser().email}
            </div>
     );
 };
