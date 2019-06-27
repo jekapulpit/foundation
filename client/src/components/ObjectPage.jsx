@@ -83,7 +83,7 @@ class ObjectPage extends React.Component {
             <div className={"container"}>
                 <div className="object-page">
                     {objectView}
-                    <button onClick={() => this.handleDelete()}>delete object</button>
+                    <button className="button delete" onClick={() => this.handleDelete()}>delete object</button>
                 </div>
             </div>
         )
