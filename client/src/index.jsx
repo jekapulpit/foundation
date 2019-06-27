@@ -6,6 +6,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Profile from './components/users/Profile';
+import Login from './components/users/Login';
 import MainPage from "./components/MainPage";
 import ObjectPage from "./components/ObjectPage";
 import NewObjectForm from "./components/object/NewObjectForm";
@@ -15,6 +16,7 @@ ReactDOM.render(
         <Router>
             <Route exact path="/" component={MainPage} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/scp_objects/" component={MainPage} />
             <Route exact path="/create_new_object" component={NewObjectForm} />
             <Route exact path="/scp_objects/:id" component={ObjectPage} />
