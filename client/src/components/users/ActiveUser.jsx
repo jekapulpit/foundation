@@ -3,7 +3,7 @@ import {logout} from "../../services/authentificationService";
 
 const ActiveUser = props => {
     return (
-           <div>
+           <div className="user-info" >
                {props.user.email}
                <button onClick={() => logout()}>log out</button>
            </div>

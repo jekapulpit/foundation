@@ -2,9 +2,9 @@ import React from "react"
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
 import { SET_OBJECT_LIST } from "../actionTypes";
-import { getCurrentUser } from '../services/localStorageServices'
 import { getTokenFromCookie } from '../services/cookieServices'
 import '../stylesheets/components/MainPage.scss'
+import Object from "./object/Object";
 
 class MainPage extends React.Component {
     componentDidMount() {
@@ -22,9 +22,7 @@ class MainPage extends React.Component {
 
     render() {
         let objects = this.props.objectList.map((object) => {
-           return (<Link to={"/scp_objects/" + object.number} key={object.number} >
-               {`SCP-${object.number} - ${object.name}`}
-           </Link>)
+           return (<Object key={object.number}  object={object} />)
         });
         return (
             <div className={"container"}>

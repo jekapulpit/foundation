@@ -4,6 +4,7 @@ import ObjectFields from "./object/ObjectFields";
 import EditObjectForm from "./object/EditObjectForm";
 import { SET_OBJECT, HANDLE_EDIT, HANDLE_UPDATE } from '../actionTypes'
 import { getTokenFromCookie } from "../services/cookieServices";
+import '../stylesheets/components/ObjectPage.scss'
 
 class ObjectPage extends React.Component {
     constructor(props) {
@@ -80,8 +81,10 @@ class ObjectPage extends React.Component {
             (<EditObjectForm handleEdit={this.handleEdit} currentObject={this.props.currentObject}/>);
         return (
             <div className={"container"}>
-                {objectView}
-                <button onClick={() => this.handleDelete()}>delete object</button>
+                <div className="object-page">
+                    {objectView}
+                    <button onClick={() => this.handleDelete()}>delete object</button>
+                </div>
             </div>
         )
     }
