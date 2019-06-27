@@ -2,7 +2,7 @@ import { syncronizeCurrentUser } from './services/authentificationService'
 
 export default  {
     user: {
-        users: [{ name: 'eugene' }],
+        users: [],
         currentUser: syncronizeCurrentUser(),
     },
     object: {

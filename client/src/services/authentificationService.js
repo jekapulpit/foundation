@@ -1,7 +1,7 @@
 import { setUserSession, getCurrentUser } from './localStorageServices'
 import { setCookie, getTokenFromCookie } from './cookieServices'
 import store from '../store'
-import {SET_OBJECT_LIST} from "../actionTypes";
+import { AUTHENTICATE } from "../actionTypes";
 
 export function authentificateUser(userCredintials) {
     let url = 'http://localhost:3001/api/v4/auth';
@@ -18,6 +18,7 @@ export function authentificateUser(userCredintials) {
             if(data.token) {
                 setUserSession(data.current_user);
                 setCookie('auth_token', data.token);
+                store.dispatch({type: AUTHENTICATE, currentUser: data.current_user});
                 window.location = '/profile'
             }
             else {

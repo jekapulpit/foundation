@@ -9,11 +9,13 @@ import Profile from './components/users/Profile';
 import Login from './components/users/Login';
 import MainPage from "./components/MainPage";
 import ObjectPage from "./components/ObjectPage";
+import Header from "./components/Header";
 import NewObjectForm from "./components/object/NewObjectForm";
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
+            <Route path="/" component={Header} />
             <Route exact path="/" component={MainPage} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
