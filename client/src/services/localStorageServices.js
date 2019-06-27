@@ -2,7 +2,7 @@ export const setUserSession = (user) => {
     window.localStorage.setItem('currentUser', JSON.stringify(user));
 };
 
-export const deleteUserSession = (user) => {
+export const deleteUserSession = () => {
     window.localStorage.removeItem('currentUser');
 };
 

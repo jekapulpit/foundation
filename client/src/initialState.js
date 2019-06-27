@@ -1,9 +1,10 @@
 import { syncronizeCurrentUser } from './services/authentificationService'
+import { getTokenFromCookie } from "./services/cookieServices";
 
 export default  {
     user: {
         users: [],
-        currentUser: syncronizeCurrentUser(),
+        currentUser: (getTokenFromCookie() ? syncronizeCurrentUser() : null),
     },
     object: {
         objectList: [],

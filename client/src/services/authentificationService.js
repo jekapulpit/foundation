@@ -1,7 +1,7 @@
-import { setUserSession, getCurrentUser } from './localStorageServices'
-import { setCookie, getTokenFromCookie } from './cookieServices'
+import { setUserSession, getCurrentUser, deleteUserSession } from './localStorageServices'
+import { setCookie, getTokenFromCookie, deleteCookie } from './cookieServices'
 import store from '../store'
-import { AUTHENTICATE } from "../actionTypes";
+import { AUTHENTICATE, LOG_OUT } from "../actionTypes";
 
 export function authentificateUser(userCredintials) {
     let url = 'http://localhost:3001/api/v4/auth';
@@ -27,9 +27,16 @@ export function authentificateUser(userCredintials) {
         })
 }
 
+export function logout() {
+    deleteUserSession();
+    deleteCookie('auth_token');
+    store.dispatch({ type: LOG_OUT });
+    window.location = '/login'
+}
+
 export function syncronizeCurrentUser() {
     if(!getCurrentUser()) {
-        let url = 'http://localhost:3001/api/v4/sync';
+        let url = 'http://localhost:3001/api/v4/auth/sync';
         let requestOpts = {
             method: 'GET',
             headers: {
