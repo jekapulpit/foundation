@@ -4,9 +4,16 @@
   height: 100px;
   background-color: #FFFAFA;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   .user-info {
     margin: 20px;
+  }
+
+  .main-logo {
+    font-size: 30px;
+    text-decoration: none;
+    margin-left: 20px;
+    color: #000;
   }
 }
