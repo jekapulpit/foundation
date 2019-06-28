@@ -1,14 +1,14 @@
 import React from "react"
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
-import { SET_OBJECT_LIST } from "../actionTypes";
+import { SET_ARTICLE_LIST } from "../actionTypes";
 import { getTokenFromCookie } from '../services/cookieServices'
 import '../stylesheets/components/MainPage.scss'
-import Object from "./object/Object";
+import Article from "./article/Article";
 
 class MainPage extends React.Component {
     componentDidMount() {
-        fetch('http://localhost:3001/api/v4/scp_objects/', {
+        fetch('http://localhost:3001/api/v4/articles/', {
             mode: 'cors',
             headers: {
                 'Authorization': getTokenFromCookie()
@@ -16,21 +16,21 @@ class MainPage extends React.Component {
         })
             .then((response) => { return response.json() })
             .then((data) => {
-                this.props.toggleSetObjectList(data)
+                this.props.toggleSetArticleList(data)
             })
     }
 
     render() {
-        let objects = this.props.objectList.map((object) => {
-           return (<Object key={object.number}  object={object} />)
+        let articles = this.props.articleList.map((article) => {
+           return (<Article key={article.name} article={article} />)
         });
         return (
             <div className={"container"}>
-                <div className="object-list">
-                    {objects}
+                <div className="article-list">
+                    {articles}
                 </div>
-                <Link to={"/create_new_object"} >
-                    Create new object
+                <Link to={"/create_new_article"} >
+                    Create new article
                 </Link>
             </div>
         )
@@ -39,14 +39,14 @@ class MainPage extends React.Component {
 
 
 const mapStateToProps = state => ({
-    objectList: state.object.objectList,
+    articleList: state.article.articleList,
     currentUser: state.user.currentUser
 });
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
-        toggleSetObjectList: (data) => {
-            dispatch({ type: SET_OBJECT_LIST, objectList: data.objects })
+        toggleSetArticleList: (data) => {
+            dispatch({ type: SET_ARTICLE_LIST, articleList: data.articles })
         }
     }
 };

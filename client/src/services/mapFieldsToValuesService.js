@@ -1,7 +1,7 @@
 export function mapFieldsToValues(fields) {
-    let newObject = fields;
-    for (var key in newObject) {
-        newObject[key] = fields[key].value
+    let newArticle = fields;
+    for (var key in newArticle) {
+        newArticle[key] = fields[key].value
     }
-    return newObject;
+    return newArticle;
 };

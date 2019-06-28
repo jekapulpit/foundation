@@ -1,5 +1,5 @@
-export const SET_OBJECT_LIST = 'SET_OBJECT_LIST';
-export const SET_OBJECT = 'SET_OBJECT';
+export const SET_ARTICLE_LIST = 'SET_ARTICLE_LIST';
+export const SET_ARTICLE = 'SET_ARTICLE';
 export const HANDLE_EDIT = 'HANDLE_EDIT';
 export const HANDLE_UPDATE = 'HANDLE_UPDATE';
 export const HANDLE_DELETE = 'HANDLE_DELETE';
