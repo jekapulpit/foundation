@@ -1,4 +1,6 @@
 import React from "react"
+import Grid from '@material-ui/core/Grid';
+import {getTokenFromCookie} from "../../services/cookieServices";
 
 class NewObjectForm extends React.Component {
     mapFieldsToValues = (fields) => {
@@ -13,7 +15,8 @@ class NewObjectForm extends React.Component {
         fetch(`http://localhost:3001/api/v4/scp_objects/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': getTokenFromCookie()
                 },
                 body: JSON.stringify({ scp_object: this.mapFieldsToValues(newObjectValues) })
             },
@@ -27,16 +30,43 @@ class NewObjectForm extends React.Component {
     render() {
         let objectFields = {};
         return (
-            <React.Fragment>
-                <div className="object-list">
-                    SCP-<input ref={input => objectFields.number = input} type="text" placeholder="new object's number" />
+            <Grid
+                container
+                direction="row"
+                spacing={3}
+            >
+                <Grid item xs={6}>
+                    Номер объекта:
+                </Grid>
+                <Grid item xs={6}>
+                    <input ref={input => objectFields.number = input} type="text" placeholder="new object's number" />
+                </Grid>
+                <Grid item xs={6}>
+                    Название объекта:
+                </Grid>
+                <Grid item xs={6}>
                     <input ref={input => objectFields.name = input} type="text" placeholder="new object's name" />
-                    Класс объекта: <input ref={input => objectFields.object_class = input} type="text" placeholder="new object's class" />
-                    Особые условия содержания: <textarea ref={input => objectFields.containment_procedures = input} placeholder="new object's containment procedures" />
-                    Описание: <textarea ref={input => objectFields.description = input} placeholder="new object's description" />
-                </div>
-                <button onClick={() => this.handleNew(objectFields)}>create</button>
-            </React.Fragment>
+                </Grid>
+                <Grid item xs={6}>
+                    Класс объекта:
+                </Grid>
+                <Grid item xs={6}>
+                    <input ref={input => objectFields.object_class = input} type="text" placeholder="new object's class" />
+                </Grid>
+                <Grid item xs={6}>
+                    Особые условия содержания:
+                </Grid>
+                <Grid item xs={6}>
+                    <textarea ref={input => objectFields.containment_procedures = input} placeholder="new object's containment procedures" />                </Grid>
+                <Grid item xs={6}>
+                    Описание:
+                </Grid>
+                <Grid item xs={6}>
+                    <textarea ref={input => objectFields.description = input} placeholder="new object's description" />                </Grid>
+                <Grid item xs={12}>
+                    <button onClick={() => this.handleNew(objectFields)}>create</button>
+                </Grid>
+            </Grid>
         )
     }
 }
