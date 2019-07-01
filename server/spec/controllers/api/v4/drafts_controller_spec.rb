@@ -4,7 +4,12 @@ RSpec.describe Api::V4::DraftsController, type: :controller do
   let(:user) { FactoryGirl.create(:user_with_drafts) }
   let(:draft) { user.drafts.first }
   describe '#index' do
-
+    before do
+      get "index", :params => { :id => user.id }
+    end
+    it 'should return expected number of drafts' do
+      expect((JSON.parse response.body)["drafts"].count).to eq user.drafts.count
+    end
   end
 
   describe '#show' do
