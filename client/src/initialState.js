@@ -1,10 +1,13 @@
+import { syncronizeCurrentUser } from './services/authentificationService'
+import { getTokenFromCookie } from "./services/cookieServices";
+
 export default  {
     user: {
-        users: [{ name: 'eugene' }],
-        currentUser: { name: 'eugene' },
+        users: [],
+        currentUser: (getTokenFromCookie() ? syncronizeCurrentUser() : null),
     },
-    object: {
-        objectList: [],
-        currentObject: {}
+    article: {
+        articleList: [],
+        currentArticle: {}
     }
 };

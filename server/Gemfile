@@ -17,6 +17,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'devise'
+gem 'jwt'
 gem 'devise-async'
 gem 'rack-cors'
 gem 'jbuilder', '~> 2.5'
@@ -25,8 +26,7 @@ gem 'searchkick'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
+gem 'bcrypt'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
