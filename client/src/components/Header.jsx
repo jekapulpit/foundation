@@ -8,7 +8,7 @@ const Header = props => {
     return (
         <div className={"header"}>
             <Link className='main-logo' to={"/"} >
-                Object list
+                Article list
             </Link>
             {props.currentUser ? (<ActiveUser user={props.currentUser}/>) : (<div className="user-info">log in</div>)}
         </div>

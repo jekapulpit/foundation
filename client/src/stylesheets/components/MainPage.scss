@@ -1,10 +1,10 @@
-.object-list {
+.article-list {
   display: flex;
   flex-direction: column;
 
-  .object {
+  .article {
 
-    .object-link {
+    .article-link {
       color: black;
       text-decoration: none;
       &:hover {

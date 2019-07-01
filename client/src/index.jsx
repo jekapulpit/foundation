@@ -8,9 +8,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Profile from './components/users/Profile';
 import Login from './components/users/Login';
 import MainPage from "./components/MainPage";
-import ObjectPage from "./components/ObjectPage";
+import ArticlePage from "./components/ArticlePage";
 import Header from "./components/Header";
-import NewObjectForm from "./components/object/NewObjectForm";
+import NewArticleForm from "./components/article/NewArticleForm";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -19,9 +19,9 @@ ReactDOM.render(
             <Route exact path="/" component={MainPage} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/scp_objects/" component={MainPage} />
-            <Route exact path="/create_new_object" component={NewObjectForm} />
-            <Route exact path="/scp_objects/:id" component={ObjectPage} />
+            <Route exact path="/articles/" component={MainPage} />
+            <Route exact path="/create_new_article" component={NewArticleForm} />
+            <Route exact path="/articles/:id" component={ArticlePage} />
         </Router>
     </Provider>,
     document.getElementById('root'));
