@@ -17,7 +17,7 @@ ReactDOM.render(
         <Router>
             <Route path="/" component={Header} />
             <Route exact path="/" component={MainPage} />
-            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/articles/" component={MainPage} />
             <Route exact path="/create_new_article" component={NewArticleForm} />
