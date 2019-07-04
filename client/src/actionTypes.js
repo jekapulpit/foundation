@@ -1,7 +1,11 @@
 export const SET_ARTICLE_LIST = 'SET_ARTICLE_LIST';
+export const SET_DRAFT_LIST = 'SET_DRAFT_LIST';
 export const SET_ARTICLE = 'SET_ARTICLE';
+export const SET_DRAFT = 'SET_DRAFT';
 export const HANDLE_EDIT = 'HANDLE_EDIT';
+export const HANDLE_EDIT_DRAFT = 'HANDLE_EDIT_DRAFT';
 export const HANDLE_UPDATE = 'HANDLE_UPDATE';
+export const HANDLE_UPDATE_DRAFT = 'HANDLE_UPDATE_DRAFT';
 export const HANDLE_DELETE = 'HANDLE_DELETE';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOG_OUT = 'LOG_OUT';
