@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_07_04_132927) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "article_id"
+    t.string "article_id"
     t.index ["article_id"], name: "index_drafts_on_article_id"
     t.index ["user_id"], name: "index_drafts_on_user_id"
   end
@@ -56,5 +56,6 @@ ActiveRecord::Schema.define(version: 2019_07_04_132927) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "drafts", "articles", primary_key: "name"
   add_foreign_key "drafts", "users"
 end
