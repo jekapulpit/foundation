@@ -9,5 +9,9 @@ export default  {
     article: {
         articleList: [],
         currentArticle: {}
+    },
+    draft: {
+        draftList: [],
+        currentDraft: {}
     }
 };
