@@ -1,7 +1,8 @@
 import React from "react"
-import {getCurrentUser, setUserSession} from "../../services/localStorageServices";
 import {getTokenFromCookie} from "../../services/cookieServices";
+import Draft from '../article/Draft';
 import { Link } from "react-router-dom";
+import {getCurrentUser} from "../../services/localStorageServices";
 
 class Profile extends React.Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        let url = ('http://localhost:3001/api/v4/users/' + this.props.match.params.id);
+        let userId = this.props.match.params.id ? this.props.match.params.id : getCurrentUser().id;
+        let url = ('http://localhost:3001/api/v4/users/' + userId);
         let requestOpts = {
             method: 'GET',
             headers: {
@@ -34,14 +36,12 @@ class Profile extends React.Component {
 
     render() {
         let drafts = this.state.currentProfile.drafts.map((draft) => {
-            return (<Link to={"/drafts/" + draft.id} >
-                {draft.title}
-            </Link>)
+            return (<Draft key={draft.name} draft={draft} userId={this.state.currentProfile.info.id} />)
         });
         return (
             <div>
                 {this.state.currentProfile.info.email}
-                <p>your drafts: </p>
+                <p>your drafts: <Link to={"/create_new_draft"} >+</Link> </p>
                 {drafts}
             </div>
         );
