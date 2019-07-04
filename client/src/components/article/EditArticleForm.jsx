@@ -1,5 +1,6 @@
 import React from "react"
 import Grid from '@material-ui/core/Grid';
+import {mapFieldsToValues} from "../../services/mapFieldsToValuesService";
 
 const EditArticleForm = props => {
     let articleFields = {};
@@ -34,7 +35,10 @@ const EditArticleForm = props => {
                     <textarea ref={input => articleFields.body = input} defaultValue={props.currentArticle.body} />
                 </Grid>
                 <Grid item xs={12}>
-                    <button onClick={() => props.handleEdit(articleFields)}>update</button>
+                    <button onClick={() => props.handleEdit(articleFields)}>save</button>
+                </Grid>
+                <Grid item xs={12}>
+                    <button onClick={() => props.handleSaveAsDraft(mapFieldsToValues(articleFields))}>save as draft</button>
                 </Grid>
             </Grid>
     )

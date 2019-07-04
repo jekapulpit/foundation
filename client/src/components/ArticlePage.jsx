@@ -4,13 +4,15 @@ import ArticleFields from "./article/ArticleFields";
 import EditArticleForm from "./article/EditArticleForm";
 import { SET_ARTICLE, HANDLE_EDIT, HANDLE_UPDATE } from '../actionTypes'
 import { getTokenFromCookie } from "../services/cookieServices";
+import {mapFieldsToValues} from "../services/mapFieldsToValuesService";
 import '../stylesheets/components/ArticlePage.scss'
 
 class ArticlePage extends React.Component {
     constructor(props) {
         super(props);
         this.handleUpdate = this.handleUpdate.bind(this);
-        this.handleEdit = this.handleEdit.bind(this)
+        this.handleEdit = this.handleEdit.bind(this);
+        this.handleSaveAsDraft = this.handleSaveAsDraft.bind(this)
     }
 
     componentDidMount() {
@@ -26,14 +28,6 @@ class ArticlePage extends React.Component {
                 this.props.toggleSetArticle(data)
             })
     }
-
-    mapFieldsToValues = (fields) => {
-        let newArticle = fields;
-        for (var key in newArticle) {
-            newArticle[key] = fields[key].value
-        }
-        return newArticle;
-    };
 
     handleUpdate = (newArticleValues) => {
         fetch(`http://localhost:3001/api/v4/articles/${this.props.match.params.id}`, {
@@ -54,7 +48,7 @@ class ArticlePage extends React.Component {
 
     handleEdit = (ArticleFields = {}) => {
         if(this.props.currentArticle.editable){
-            this.handleUpdate(this.mapFieldsToValues(ArticleFields))
+            this.handleUpdate(mapFieldsToValues(ArticleFields))
         }
         this.props.toggleHandleEdit(this.props.currentArticle.editable)
     };
@@ -74,11 +68,32 @@ class ArticlePage extends React.Component {
             })
     };
 
+    handleSaveAsDraft = (articleFields = this.props.currentArticle) => {
+        fetch(`http://localhost:3001/api/v4/drafts/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': getTokenFromCookie()
+                },
+                body: { draft: {...articleFields, article_id: articleFields.name} }
+            },
+        )
+            .then((response) => { return response.json() })
+            .then((data) => {
+                if(data.success)
+                    console.log('yea, it saved');
+            })
+    };
+
     render() {
         let ArticleView = !this.props.currentArticle.editable ?
-            (<ArticleFields handleEdit={this.handleEdit} currentArticle={this.props.currentArticle} />)
+            (<ArticleFields handleSaveAsDraft={this.handleSaveAsDraft}
+                            handleEdit={this.handleEdit}
+                            currentArticle={this.props.currentArticle} />)
             :
-            (<EditArticleForm handleEdit={this.handleEdit} currentArticle={this.props.currentArticle}/>);
+            (<EditArticleForm handleSaveAsDraft={this.handleSaveAsDraft}
+                              handleEdit={this.handleEdit}
+                              currentArticle={this.props.currentArticle}/>);
         return (
             <div className={"container"}>
                 <div className="Article-page">
@@ -89,7 +104,6 @@ class ArticlePage extends React.Component {
         )
     }
 }
-
 
 const mapStateToProps = state => ({
     currentArticle: state.article.currentArticle,

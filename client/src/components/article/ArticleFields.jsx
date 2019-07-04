@@ -8,6 +8,7 @@ const ArticleFields = props => {
                     {props.currentArticle.body}
                 </div>
                 <button onClick={() => props.handleEdit()}>edit</button>
+                <button onClick={() => props.handleSaveAsDraft()}>save as draft</button>
             </React.Fragment>
         )
 };
