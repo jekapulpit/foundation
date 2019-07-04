@@ -1,13 +1,15 @@
 import React from "react"
 import {getCurrentUser, setUserSession} from "../../services/localStorageServices";
 import {getTokenFromCookie} from "../../services/cookieServices";
+import { Link } from "react-router-dom";
 
 class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             currentProfile: {
-                info: {}
+                info: {},
+                drafts: []
             }
         }
     }
@@ -31,9 +33,16 @@ class Profile extends React.Component {
     }
 
     render() {
+        let drafts = this.state.currentProfile.drafts.map((draft) => {
+            return (<Link to={"/drafts/" + draft.id} >
+                {draft.title}
+            </Link>)
+        });
         return (
             <div>
                 {this.state.currentProfile.info.email}
+                <p>your drafts: </p>
+                {drafts}
             </div>
         );
     }
